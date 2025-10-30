@@ -72,8 +72,13 @@ $ ros2 run armando_controller arm_controller_node --ros-args -p controller_type:
 ````
 $ ros2 run armando_controller arm_controller_node --ros-args -p controller_type:=1
 ````
-### Running the camera bridge 
-To access the images captured by the camera sensor in the ros2 environment, a bridge between it and Gazebo environment. To run the bridge via the launch file, in which it is defined, the command is:
+### Running the camera bridge and checking the images
+To access the images captured by the camera sensor in the ros2 environment, a bridge between it and Gazebo environment is needed. To run the bridge via the launch file, in which it is defined, the command is:
 ````
 $ ros2 launch armando_gazebo armando_gazebo.launch.py
+````
+To check the images captured by the camera sensor, the ````rqt_image_view```` tool can be used. To run it the command is:
+
+````
+$ ros2 run rqt_image_view rqt_image_view
 ````
