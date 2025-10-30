@@ -23,13 +23,17 @@ $ sudo apt install ros-${ROS_DISTRO}-urdf-launch ros-${ROS_DISTRO}-joint-state-p
 
 ## ROS2
 ### Building and sourcing the environment
-Following the creation and running of the docker container, to setup the RO2 workspace it is requested to access the workspace directory (1.), build the workspace (2.) and source the overlay (3.), as shown in the 3 lines beneath:  
+Following the creation and running of the docker container, to setup the RO2 workspace it is requested to access the src directory of the workspace(1.), clone the packages of the repository (2.), return to the workspace directory (3.), build the workspace (4.) and source the overlay (5.), as shown in the lines beneath:  
 ````
-1. $ cd <workspace_directory_name> 
+1. $ cd <workspace_directory_name>/src 
 
-2. $ colcon build
+2. $ git clone https://github.com/DhaTeremin/HW1-repository.git temp && mv temp/* temp/.* . 2>/dev/null && rmdir temp
 
-3. $ source install/setup.bash
+3. $ cd ..
+
+4. $ colcon build
+
+5. $ source install/setup.bash
 ````
 The second row command can be executed just by one of the terminal connected to the docker container, conversly the first and third row are mandatory for every terminal that connects to correctly use the workspace.
 
@@ -57,18 +61,16 @@ After starting up the controller, it is required to run the related publisher vi
 ````
 $ cd <workspace_directory_name> 
 
-$ colcon build
-
 $ source install/setup.bash
 ````
 The controller node, then, can be run depending on the publisher selected
 #### Running the position controller publisher
 ````
-$ ros2 run armando_controller arm_controller_node.cpp --ros-args -p controller_type:=0
+$ ros2 run armando_controller arm_controller_node --ros-args -p controller_type:=0
 ````
 #### Running the joint_trajectory controller publisher
 ````
-$ ros2 run armando_controller arm_controller_node.cpp --ros-args -p controller_type:=1
+$ ros2 run armando_controller arm_controller_node --ros-args -p controller_type:=1
 ````
 ### Running the camera bridge 
 To access the images captured by the camera sensor in the ros2 environment, a bridge between it and Gazebo environment. To run the bridge via the launch file, in which it is defined, the command is:
